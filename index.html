@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <title>Calulator</title>
+    <style>
+        * {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .calc {
+            padding: 19px;
+            border-radius: 10px;
+            width: 358px;
+        }
+
+        .textfield {
+            margin-left: 12px;
+        }
+
+        .mdl-button {
+            margin: 0.5em;
+        }
+    </style>
+</head>
+<body>
+
+<div class="mdl-card mdl-card mdl-shadow--16dp calc">
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield">
+        <input class="mdl-textfield__input" type="text" id="textbox">
+        <label class="mdl-textfield__label">Type your expression</label>
+    </div>
+    <div class="flex">
+        <div>
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
+                    onclick="append('1');">1
+            </button>
+        </div>
+        <div>
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
+                    onclick="append('2');">2
+            </button>
+        </div>
+        <div>
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
+                    onclick="append('3');">3
+            </button>
+        </div>
+        <div>
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
+                    onclick="append('+');">+
+            </button>
+        </div>
+    </div>
+    <div class="flex">
+        <div>
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
+                    onclick="append('4');">4
+            </button>
+        </div>
+        <div>
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
+                    onclick="append('5');">5
+            </button>
+        </div>
+        <div>
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
+                    onclick="append('6');">6
+            </button>
+        </div>
+        <div>
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
+                    onclick="append('-');">-
+            </button>
+        </div>
+    </div>
+    <div class="flex">
+        <div>
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
+                    onclick="append('7');">7
+            </button>
+        </div>
+        <div>
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
+                    onclick="append('8');">8
+            </button>
+        </div>
+        <div>
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
+                    onclick="append('9');">9
+            </button>
+        </div>
+        <div>
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
+                    onclick="append('*');">
+                &#x00D7;
+            </button>
+        </div>
+    </div>
+    <div class="flex">
+        <div>
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
+                    onclick="append('0');">0
+            </button>
+        </div>
+        <div>
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
+                    onclick="append('.');">.
+            </button>
+        </div>
+        <div>
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
+                    onclick="append('=');">=
+            </button>
+        </div>
+        <div>
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
+                    onclick="append('/');">
+                &#x00F7;
+            </button>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+<script>
+    var textBox = $("#textbox")
+
+    function append(symbol) {
+        textBox.val(textBox.val() + symbol);
+        textBox.parent().addClass('is-dirty');
+    }
+</script>
+</body>
+</html>
