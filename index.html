@@ -158,7 +158,8 @@
     }
 
     function calculate() {
-        if (textBox.val().match(/-?\d+([.,]\d+)?[+\-*/]-?\d+([.,]\d+)?/)[0] !== textBox.val()) {
+        var matchArr = textBox.val().match(/-?\d+([.,]\d+)?[+\-*/]-?\d+([.,]\d+)?/);
+        if ((matchArr == null) || (matchArr[0] !== textBox.val())) {
             warning[0].MaterialSnackbar.showSnackbar({message: "Invalid expression"});
             textBox.val("");
             return;
