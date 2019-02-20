@@ -151,7 +151,6 @@
 <script>
     const textBox = $('#textbox');
     const warning = $('#warning');
-    const expressionRegExp = new RegExp('-?\\d+([.,]?\\d+)?[+\\-*\\/]-?\\d+([.,]?\\d+)?');
 
     function append(symbol) {
         textBox.val(textBox.val() + symbol);
@@ -159,7 +158,7 @@
     }
 
     function calculate() {
-        if (!expressionRegExp.test(textBox.val())) {
+        if (textBox.val().match(/-?\d+([.,]\d+)?[+\-*/]-?\d+([.,]\d+)?/)[0] !== textBox.val()) {
             warning[0].MaterialSnackbar.showSnackbar({message: "Invalid expression"});
             textBox.val("");
             return;
