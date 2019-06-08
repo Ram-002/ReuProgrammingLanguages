@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chess</title>
+</head>
+<body>
+<input type="file" id="input" onchange="read(this.files)">
+
+<div id="container">
+
+</div>
+
+<script>
+    function read(files) {
+        if (files.length === 0) {
+            alert("No file!")
+        } else {
+            const reader = new FileReader();
+            reader.readAsText(files[0]);
+            reader.onload = function (e) {
+                alert(e);
+            }
+        }
+    }
+
+    function f() {
+        document.getElementById("container").testval = {"abc": 11};
+    }
+    f();
+</script>
+
+</body>
+</html>
