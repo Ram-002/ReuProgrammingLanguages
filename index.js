@@ -91,13 +91,13 @@ function generateControls(moves, fieldContainer) {
     container.classList.add("field-controls");
 
     const backwardButton = document.createElement("button");
-    backwardButton.innerText = "<";
+    backwardButton.innerHTML = "<i class=\"material-icons\">arrow_back</i>";
     container.appendChild(backwardButton);
     backwardButton.moves = moves;
     backwardButton.classList.add("btn", "field-button");
 
     const forwardButton = document.createElement("button");
-    forwardButton.innerText = ">";
+    forwardButton.innerHTML = "<i class=\"material-icons\">arrow_forward</i>";
     container.appendChild(forwardButton);
     forwardButton.moves = moves;
     forwardButton.classList.add("btn", "field-button");
@@ -105,7 +105,7 @@ function generateControls(moves, fieldContainer) {
     let movePointer = 0;
 
     forwardButton.addEventListener("click", function (e) {
-        const moves = e.target.moves;
+        let moves = (e.target.moves) ? e.target.moves : e.target.parentElement.moves;
         if (moves.length <= movePointer) {
             return;
         }
@@ -121,7 +121,7 @@ function generateControls(moves, fieldContainer) {
     });
 
     backwardButton.addEventListener("click", function (e) {
-        const moves = e.target.moves;
+        let moves = (e.target.moves) ? e.target.moves : e.target.parentElement.moves;
         if (movePointer === 0) {
             return;
         }
