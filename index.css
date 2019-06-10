@@ -7,6 +7,11 @@ body {
     align-items: center;
 }
 
+.file-button {
+    display: block;
+    margin: 5pt;
+}
+
 #fileInput {
     display: none;
 }
@@ -15,9 +20,8 @@ body {
     display: block;
 }
 
-.field {
+.field-container {
     display: block;
-    width: unset;
 }
 
 .field-body {
@@ -25,18 +29,18 @@ body {
     flex-direction: column;
 }
 
-.field-foot {
-    width: inherit;
+.field-controls {
     display: flex;
+    justify-content: space-around;
 }
 
-.row {
+.field-row {
     margin: 0;
     border: 0;
     display: flex;
 }
 
-.cell {
+.field-cell {
     width: 30pt;
     height: 30pt;
     line-height: 30pt;
@@ -48,12 +52,14 @@ body {
     padding: 0;
 }
 
-.fb .cell:nth-child(2n+2) {
+.row-first-black .field-cell:nth-child(2n+2) {
     background: lightgray;
 }
 
-.fw .cell:nth-child(2n+3) {
+.row-first-white .field-cell:nth-child(2n+3) {
     background: lightgray;
 }
 
-
+.field-button {
+    margin: 5pt;
+}

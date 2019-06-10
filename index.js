@@ -30,43 +30,51 @@ function prepareField(moves) {
     fileInputPlaceholder.style.display = "none";
     fileInputDefault.style.display = "none";
 
-    let table = generateTable();
-    generateControls(parseReplay(moves), table);
-    document.body.appendChild(table);
+    document.body.appendChild(generateField(moves));
 }
 
-function generateTable() {
-    const table = document.createElement("table");
-    table.classList.add("field");
-    table.createTBody().classList.add("field-body");
-    for (let rowCounter = 0; rowCounter < 8; rowCounter++) {
-        const row = table.insertRow();
-        row.classList.add("row");
-        row.classList.add((rowCounter % 2 === 0) ? "fw" : "fb");
-        let cell = row.insertCell();
-        cell.classList.add("cell");
-        cell.textContent = 8 - rowCounter;
-        for (let cellCounter = 0; cellCounter < 8; cellCounter++) {
-            const cell = row.insertCell();
-            cell.classList.add("cell");
-            cell.classList.add(names[cellCounter] + (8 - rowCounter));
-            cell.textContent = getChessForRowAndCell(8 - rowCounter, cellCounter + 1);
+function generateField(moves) {
+    const fieldContainer = document.createElement("div");
+    fieldContainer.classList.add("field-container");
 
+    const fieldBody = fieldContainer.appendChild(document.createElement("div"));
+    fieldBody.classList.add("field-body");
+
+    for (let rowCounter = 0; rowCounter < 8; rowCounter++) {
+        const fieldRow = fieldBody.appendChild(document.createElement("div"));
+        fieldRow.classList.add("field-row");
+        fieldRow.classList.add((rowCounter % 2 === 0) ? "row-first-white" : "row-first-black");
+
+        let fieldCellRowNumber = fieldRow.appendChild(document.createElement("div"));
+        fieldCellRowNumber.classList.add("field-cell");
+        fieldCellRowNumber.textContent = 8 - rowCounter;
+
+        for (let cellCounter = 0; cellCounter < 8; cellCounter++) {
+            const fieldCell = fieldRow.appendChild(document.createElement("div"));
+            fieldCell.history = [];
+            fieldCell.classList.add("field-cell");
+            fieldCell.classList.add(names[cellCounter] + (8 - rowCounter));
+            fieldCell.textContent = getChessForRowAndCell(8 - rowCounter, cellCounter + 1);
         }
     }
-    const row = table.insertRow();
-    row.classList.add("row");
-    row.insertCell().classList.add("cell");
-    for (let i = 0; i < 10; i++) {
-        const cell = row.insertCell();
-        cell.classList.add("cell");
+
+    const row = fieldBody.appendChild(document.createElement("div"));
+    row.classList.add("field-row");
+
+    let cell = row.appendChild(document.createElement("div"));
+    cell.classList.add("field-cell");
+    for (let i = 0; i < 8; i++) {
+        const cell = row.appendChild(document.createElement("div"));
+        cell.classList.add("field-cell");
         cell.textContent = names[i];
     }
-    return table;
+
+    fieldContainer.appendChild(generateControls(parseMoves(moves), fieldContainer));
+    return fieldContainer;
 }
 
 
-function parseReplay(text) {
+function parseMoves(text) {
     const tokens = text.split(" ");
     if (tokens % 2 === 1) {
         alert("Invalid file")
@@ -78,23 +86,21 @@ function parseReplay(text) {
     return out;
 }
 
-function generateControls(moves, table) {
-    const footer = table.createTFoot();
-    footer.classList.add("field-foot")
-    const cell = footer.insertRow().insertCell();
-    cell.colSpan = 8;
+function generateControls(moves, fieldContainer) {
+    const container = document.createElement("div");
+    container.classList.add("field-controls");
 
     const backwardButton = document.createElement("button");
-    backwardButton.innerText = "Backward";
-    cell.appendChild(backwardButton);
+    backwardButton.innerText = "<";
+    container.appendChild(backwardButton);
     backwardButton.moves = moves;
-    backwardButton.classList.add("btn");
+    backwardButton.classList.add("btn", "field-button");
 
     const forwardButton = document.createElement("button");
-    forwardButton.innerText = "Forward";
-    cell.appendChild(forwardButton);
+    forwardButton.innerText = ">";
+    container.appendChild(forwardButton);
     forwardButton.moves = moves;
-    forwardButton.classList.add("btn");
+    forwardButton.classList.add("btn", "field-button");
 
     let movePointer = 0;
 
@@ -103,15 +109,32 @@ function generateControls(moves, table) {
         if (moves.length <= movePointer) {
             return;
         }
-        const from = table.getElementsByClassName(moves[movePointer].from)[0];
-        const to = table.getElementsByClassName(moves[movePointer].to)[0];
+        const from = fieldContainer.getElementsByClassName(moves[movePointer].from)[0];
+        const to = fieldContainer.getElementsByClassName(moves[movePointer].to)[0];
 
+        to.history.push(to.textContent);
 
         to.textContent = from.textContent;
         from.textContent = "";
 
         movePointer++;
     });
+
+    backwardButton.addEventListener("click", function (e) {
+        const moves = e.target.moves;
+        if (movePointer === 0) {
+            return;
+        }
+        const from = fieldContainer.getElementsByClassName(moves[movePointer - 1].to)[0];
+        const to = fieldContainer.getElementsByClassName(moves[movePointer - 1].from)[0];
+
+        to.textContent = from.textContent;
+        from.textContent = from.history.pop();
+
+        movePointer--;
+    });
+
+    return (container);
 }
 
 function getChessForRowAndCell(row, cell) {
