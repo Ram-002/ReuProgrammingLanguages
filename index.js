@@ -1,19 +1,19 @@
 const names = ["a", "b", "c", "d", "e", "f", "g", "h"];
 const defaultFile = "e2 e4 e7 e5 h2 h4 h7 h5 f2 f4 e5 f4";
 
-const fileInput = document.getElementById('fileInput');
+const fileInput = document.getElementById("fileInput");
 const fileInputPlaceholder = document.getElementById("fileInput-placeholder");
 const fileInputDefault = document.getElementById("fileInput-default");
 
-fileInputPlaceholder.addEventListener("click", ev => {
+fileInputPlaceholder.addEventListener("click", function (e) {
     fileInput.click();
 });
 
-fileInputDefault.addEventListener("click", ev => {
+fileInputDefault.addEventListener("click", function (e) {
     prepareField(defaultFile);
 });
 
-fileInput.addEventListener('change', function (e) {
+fileInput.addEventListener("change", function (e) {
     const file = fileInput.files[0];
 
     const reader = new FileReader();
