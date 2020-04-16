@@ -1,0 +1,28 @@
+table {
+    border-collapse: collapse;
+    margin: 10px;
+    display: block;
+}
+
+.calendar-row {
+    display: flex;
+}
+
+td {
+    text-align: center;
+    width: 25pt;
+    height: 18pt;
+}
+
+table:nth-child(3n) {
+    page-break-after: always;
+}
+
+thead {
+    background-color: #3949ab;
+    color: #ffffff;
+}
+
+button {
+    background-color: #3949ab;
+}

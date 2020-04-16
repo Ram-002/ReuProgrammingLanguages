@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-deep_purple.min.css"/>
+    <script defer src="https://code.getmdl.io/1.3.0/material.js"></script>
+
+
+    <link href="index.css" rel="stylesheet"/>
+    <script src="index.js"></script>
+</head>
+<body>
+
+<form action="javascript:printYear();" style="display: flex; flex-direction: column; align-items: center">
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <label class="mdl-textfield__label" for="date">Year: </label>
+        <input class="mdl-textfield__input" id="date" type="number" value="2019" onchange="printYear()">
+    </div>
+    <div>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">Print
+        </button>
+    </div>
+</form>
+
+<div id="calendar">
+    <div class="calendar-row" id="calendar-1"></div>
+    <div class="calendar-row" id="calendar-2"></div>
+    <div class="calendar-row" id="calendar-3"></div>
+</div>
+
+
+</body>
+</html>
